@@ -34,5 +34,13 @@ export const resolvers = {
       const { data } = await axios.get(`${FAKE_STORE_API}/products`);
       return data;
     },
+
+    // Fetch a single product by ID
+    product: async (
+      _: unknown // It could be a context object, but we don't need it here
+      , { id }: { id: string }): Promise<Product> => {
+      const { data } = await axios.get(`${FAKE_STORE_API}/products/${id}`);
+      return data;
+    }
   }
 };
