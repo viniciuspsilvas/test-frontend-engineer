@@ -1,36 +1,38 @@
-import { Cart, Product, User } from "@/types/graphql";
+import {
+  Product,
+} from "@/types/graphql";
 import axios from "axios";
-import { GraphQLError } from "graphql";
 
 const FAKE_STORE_API = "https://fakestoreapi.com";
 
 export const resolvers = {
   Query: {
-    // Fetch all products
+    // // Fetch products with pagination
+    // products: async (
+    //   _: unknown,
+    //   { page = 1, limit = 10 }: PaginationArgs
+    // ): Promise<PaginatedResponse<Product>> => {
+    //   const { data } = await axios.get(
+    //     `${FAKE_STORE_API}/products?limit=${limit}&page=${page}`
+    //   );
+
+    //   // Simulate total count (since the API doesn't provide it)
+    //   const totalResponse = await axios.get(`${FAKE_STORE_API}/products`);
+    //   const total = totalResponse.data.length;
+
+    //   return {
+    //     data,
+    //     total,
+    //     page,
+    //     limit,
+    //     hasMore: page * limit < total
+    //   };
+    // },
+    
+    // Fetch all products (no pagination) as the API doesn't supply the page parameter, only the limit
     products: async (): Promise<Product[]> => {
       const { data } = await axios.get(`${FAKE_STORE_API}/products`);
       return data;
     },
-
-    // Fetch a product by ID
-    product: async (_: unknown, { id }: { id: string }): Promise<Product> => {
-      const { data } = await axios.get(`${FAKE_STORE_API}/products/${id}`);
-      return data;
-    },
-
-    // Fetch a user's cart by user ID
-    cart: async (
-      _: unknown,
-    ): Promise<Cart> => {
-      
-      // TODO: throw an error TO BE IMPLEMENTED
-      throw new GraphQLError("Not implemented");
-    },
-
-    // Fetch a user by ID
-    user: async (_: unknown, { id }: { id: string }): Promise<User> => {
-        // TODO: throw an error TO BE IMPLEMENTED
-        throw new GraphQLError("Not implemented");
-    },
-  },
+  }
 };

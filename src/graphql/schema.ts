@@ -29,10 +29,20 @@ export const typeDefs = gql`
     phone: String!
   }
 
+  # type PaginatedProducts {
+  #   data: [Product!]!
+  #   total: Int!
+  #   page: Int!
+  #   limit: Int!
+  #   hasMore: Boolean!
+  # }
+
+
   # Root Query type
   type Query {
     # Fetch all products
     products: [Product!]!
+    # products(page: Int, limit: Int): PaginatedProducts!
 
     # Fetch a product by ID
     product(id: ID!): Product
