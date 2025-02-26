@@ -3,6 +3,7 @@ import { useCartStore } from "@/store/cartStore";
 import { useProduct } from "../../../hooks/useProduct";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface ProductDetailProps {
   id: string;
@@ -21,19 +22,29 @@ export default function ProductDetail({ id }: ProductDetailProps) {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="container mx-auto p-4"
+    >
       {/* Back to Products Button */}
-      <div className="mb-4">
+      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
         <Link href="/products">
-          <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
+          <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
             ← Back to Products
           </button>
         </Link>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
         {/* Product Image */}
-        <div className="flex justify-center">
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex justify-center"
+        >
           <Image
             src={product.image}
             alt={product.title}
@@ -41,24 +52,31 @@ export default function ProductDetail({ id }: ProductDetailProps) {
             height={200}
             className="w-full max-w-md rounded-lg shadow-lg"
           />
-        </div>
+        </motion.div>
 
         {/* Product Details */}
-        <div className="space-y-4">
+        <motion.div
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-4"
+        >
           <h1 className="text-3xl font-bold">{product.title}</h1>
           <p className="text-gray-600">{product.description}</p>
           <p className="text-2xl font-semibold">${product.price}</p>
           <p className="text-sm text-gray-500">Category: {product.category}</p>
 
           {/* Add to Cart Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition"
           >
             Add to Cart
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
