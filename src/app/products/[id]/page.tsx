@@ -1,11 +1,5 @@
-import { Metadata } from "next";
 import ProductDetails from "@/app/components/ProductDetails";
-
-interface ProductDetailProps {
-  params: {
-    id: string;
-  };
-}
+import { Metadata } from "next";
 
 // Fetch product details for metadata
 // TODO We can improve it getting the data from the graphql API instead
@@ -16,8 +10,12 @@ async function getProduct(id: string) {
 
 export async function generateMetadata({
   params
-}: ProductDetailProps): Promise<Metadata> {
-  const product = await getProduct(params.id);
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const id = (await params).id;
+
+  const product = await getProduct(id);
 
   return {
     title: `${product.title} - My Store`,
@@ -27,7 +25,7 @@ export async function generateMetadata({
       title: product.title,
       description: product.description,
       images: [{ url: product.image }],
-      url: `https://yourstore.com/products/${params.id}`
+      url: `https://yourstore.com/products/${id}`
     },
     other: {
       "og:type": "product"
@@ -35,9 +33,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: ProductDetailProps) {
-  // asynchronous access of `params.id`.
-  const { id } = await params;
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+
   return (
     <main>
       <ProductDetails id={id} />

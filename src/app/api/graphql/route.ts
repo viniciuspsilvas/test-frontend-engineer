@@ -6,15 +6,20 @@ import { resolvers } from "@/graphql/resolvers";
 const { handleRequest } = createYoga({
   schema: createSchema({
     typeDefs,
-    resolvers,
+    resolvers
   }),
 
   // Configure the GraphQL endpoint
   graphqlEndpoint: "/api/graphql",
 
   // Use the Fetch API
-  fetchAPI: { Response },
+  fetchAPI: { Response }
 });
 
 // Export the handler for GET, POST, and OPTIONS requests
-export { handleRequest as GET, handleRequest as POST, handleRequest as OPTIONS };
+
+export async function POST(request: Request) {
+
+  const ctx = {}; // TODO: Add context
+  return handleRequest(request, ctx);
+}
