@@ -25,7 +25,7 @@ export async function generateMetadata({
       title: product.title,
       description: product.description,
       images: [{ url: product.image }],
-      url: `https://yourstore.com/products/${id}`
+      url: `https://test-frontend-engineer-rho.vercel.app/products/${id}` // TODO: move to env var
     },
     other: {
       "og:type": "product"

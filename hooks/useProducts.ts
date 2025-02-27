@@ -33,6 +33,7 @@ export const useProducts = (page: number, limit: number) => {
       const startIndex = (page - 1) * limit;
       const endIndex = startIndex + limit;
       return data.slice(startIndex, endIndex); 
-    }
+    },
+    initialData: [],
   });
 };
