@@ -4,12 +4,12 @@ import NavBar from "./components/NavBar";
 import { motion } from "framer-motion";
 
 export default function LayoutClient({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen w-full ">
       <NavBar />
 
       <motion.main
@@ -18,7 +18,7 @@ export default function LayoutClient({
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
-        className="p-4"
+        className="pt-20"
       >
         {children}
       </motion.main>
