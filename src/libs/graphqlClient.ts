@@ -4,7 +4,8 @@ import {
   Variables
 } from "graphql-request";
 
-export const API_URL = "http://localhost:3000/api/graphql";
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/graphql";
 
 export const request = async <T = unknown, V = Variables>(
   document: RequestDocument,
