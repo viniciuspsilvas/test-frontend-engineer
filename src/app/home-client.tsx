@@ -9,7 +9,7 @@ export default function HomeClient() {
     <div className="w-full h-screen flex items-center justify-center overflow-hidden mt-40 pt-20 md:pt-32">
       {/* Hero Content (Left Side) */}
       <motion.div
-        className="max-w-lg text-left px-6 md:px-12 z-50"
+        className="max-w-lg text-left px-6 md:px-12"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
