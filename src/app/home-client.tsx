@@ -34,7 +34,7 @@ export default function HomeClient() {
       </motion.div>
 
       {/* Background Image (Right Side) */}
-      <div className="absolute -bottom-10 md:bottom-0 right-0 w-full md:w-1/2 h-3/4 md:h-full">
+      <div className="absolute -bottom-48 md:bottom-0 right-0 w-full md:w-1/2 h-3/4 md:h-full">
         <Image
           src="/man-hero.png"
           alt="Prime Gents Hero Background"
